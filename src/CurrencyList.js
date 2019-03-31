@@ -11,7 +11,7 @@ class CurrencyList extends Component {
     currencies: []
   }
   componentDidMount() {
-    axios.get(`http://apis.is/currency/arion`)
+    axios.get(`https://apis.is/currency/arion`)
       .then(res => {
         const currencies = res.data.results;
 
@@ -23,7 +23,7 @@ class CurrencyList extends Component {
         this.setState({ currencies });
       })
   }
-  onChange(code, factor, event) {    
+  onChange(code, factor, event) {
     var data = this.state.currencies;
 
     var inputVal = event.target.value.split('.').join("");
