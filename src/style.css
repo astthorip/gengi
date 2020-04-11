@@ -39,6 +39,11 @@ a:hover
   color: #ccc !important;
 }
 
+.card-body
+{
+  padding: 1.25rem 1.25rem 0.5rem 1.25rem
+}
+
 .card-title
 {
   font-size: 1.3em;
@@ -52,11 +57,6 @@ a:hover
 
 .card:hover {
   transform: scale(1.02);
-}
-
-.currency-price
-{
-  padding-top: 6px;
 }
 
 .currency-field
@@ -95,7 +95,6 @@ a:hover
   .card-title{
     font-size: 1.4em;
   }
-
     
   .currency-price
   {
@@ -114,6 +113,43 @@ a:hover
   }
 }
 
+.card .card-title:before
+{
+  content: '\20';
+  display: inline-block;
+  width: 34px;
+  color: rgba(255,255,255,0.1);
+}
+
+.card[data-currency="USD"] .card-title:before, .card[data-currency="CAD"] .card-title:before
+{
+    content: '$';
+}
+
+.card[data-currency="EUR"] .card-title:before
+{
+    content: '€';
+}
+
+.card[data-currency="JPY"] .card-title:before
+{
+    content: '￥';
+}
+
+.card[data-currency="GBP"] .card-title:before
+{
+    content: '£';
+}
+
+.card[data-currency="CHF"] .card-title:before
+{
+    content: '₣';
+}
+
+.card[data-currency="SEK"] .card-title:before, .card[data-currency="NOK"] .card-title:before, .card[data-currency="DKK"] .card-title:before, .card[data-currency="ISK"] .card-title:before
+{
+    content: 'kr';
+}
 
 @media (max-width: 500px) {
   
@@ -133,7 +169,10 @@ a:hover
   .card-title{
     font-size: 1em;
   }
-
+  .card-title:before
+  {
+    display: none !important;
+  }
   .card-title small
   {
     display: none;
