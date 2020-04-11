@@ -6,10 +6,6 @@ export default class Currency extends Component {
     value: ''
   }
 
-  constructor (props) {
-    super(props)
-  }
-
   static getDerivedStateFromProps(props, state) {
     // Re-run the filter whenever the list array or filter text change.
     // Note we need to store prevPropsList and prevFilterText to detect changes.
@@ -24,7 +20,9 @@ export default class Currency extends Component {
   }
 
   handleChange = (e) => {
-    this.state.value = e.target.value;
+    this.setState({
+      value: e.target.value
+    });
 
     var val = e.target.value.split('.').join("").replace(',', '.');
     if (!isNaN(val))
@@ -41,31 +39,43 @@ export default class Currency extends Component {
   };
 
   render () {
-    if (!isNaN(this.state.converter.amount) && this.state.converter.amount > 0 && this.props.data.shortName != this.state.converter.currency)
+    if (!isNaN(this.state.converter.amount) && this.state.converter.amount > 0 && this.props.data.shortName !== this.state.converter.currency)
     {
 
       var val = (Math.round(((this.state.converter.amount * this.state.converter.factor) / this.props.data.value)*100, 2))/100;
 
       if (val === 0)
       {
-        this.state.value = '';
+        if (this.state.value !== '')
+        {
+          this.setState({ value: '' });
+        }
+        
       }
       else if (!isNaN(val))
       {
-        this.state.value = val.toLocaleString('DE');
+        if (this.state.value !== val.toLocaleString('DE'))
+        {
+          this.setState({ value: val.toLocaleString('DE') });
+        }
+        
       }
     }
-    else if (this.props.data.shortName != this.state.converter.currency)
+    else if (this.props.data.shortName !== this.state.converter.currency)
     {
-      this.state.value = '';
+      if (this.state.value !== '')
+      {
+        this.setState({ value: '' });
+      }
+      
     }
     
     return (
       <div className="col-12">
-      <div className="card my-1">
+      <div className="card my-1" data-currency={this.props.data.shortName}>
         <div className="card-body d-flex flex-row justify-content-between align-content-center">
           <h2 className="card-title mb-0 flex-grow-1">{this.props.data.longName} <small>{this.props.data.shortName}</small></h2>
-          <div className="currency-price">{this.props.data.value.toLocaleString('DE')}</div>
+          <div className="currency-price">{ (this.props.data.value === 1 ? '' : this.props.data.value.toLocaleString('DE', { minimumFractionDigits: 2, maximumFractionDigits: 2})) }</div>
           <div className="currency-field">
             <input type="text" value={this.state.value} onChange={this.handleChange}></input>
           </div>

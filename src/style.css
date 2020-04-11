@@ -23,6 +23,11 @@ a:hover
   color: #fff;
 }
 
+.container
+{
+  max-width: 700px;
+}
+
 .card {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   transition: 0.1s ease-in;
@@ -32,6 +37,11 @@ a:hover
 .card p {
   font-size: 0.7em;
   color: #ccc !important;
+}
+
+.card-title
+{
+  font-size: 1.3em;
 }
 
 .card-title small
@@ -51,7 +61,7 @@ a:hover
 
 .currency-field
 {
-  width: 18%;
+  width: 27%;
   text-align: right;
   padding-left: 50px;
 }
